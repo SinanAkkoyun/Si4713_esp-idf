@@ -92,8 +92,6 @@
 #define SI4713_PROP_TX_RDS_FIFO_SIZE 0x2C07 ///< Number of blocks reserved for the FIFO. Note that the value
          ///< written must be one larger than the desired FIFO size.
 
-//#define membersof(x) (sizeof(x) / sizeof(x[0]))
-
 /*uint16_t currFreq;   ///< current frequency
   uint8_t currdBuV,    ///< current BuV
       currAntCap,      ///< current antenna capacitor
@@ -101,22 +99,28 @@
       currASQ;         ///< current ASQ
   int8_t currInLevel;  ///< current IN level*/
 
-void resetSI4713();
-bool beginSI4713();
-
-void powerUpSI4713();
-// void configure();
-//uint8_t getRev();
-
-void tuneFMSI4713(uint16_t freqKHz);
-//uint8_t getStatus(void);
-//void readTuneStatus(void);
-//void readTuneMeasure(uint16_t freq);
-void setTXPowerSI4713(uint8_t pwr, uint8_t antcap);
-//void readASQ(void);
-void setPropertySI4713(uint16_t p, uint16_t v);
+void SI4713_reset(void);
+void SI4713_powerUp(void);
+uint8_t SI4713_getRev();
+void SI4713_tune(uint16_t freqKHz);
+uint8_t SI4713_getStatus(void);
+void SI4713_readTuneStatus(void);
+void SI4713_readTuneMeasure(uint16_t freq);
+void SI4713_setTXPower(uint8_t pwr, uint8_t antcap);
+uint8_t SI4713_readASQ(void);
+uint8_t SI4713_readIN(void);
+uint8_t SI4713_readFrequency(void);
+uint8_t SI4713_readBuV(void);
+uint8_t SI4713_readAntCap(void);
+uint8_t SI4713_readNoiseLevel(void);
+void SI4713_readTuneMeasure(uint16_t freq);
+void SI4713_setProperty(uint16_t p, uint16_t v);
 
 // RDS stuff
-void beginRDSSI4713(uint16_t programID);
-void setRDSStationSI4713(char *s);
-void setRDSBufferSI4713(char *s);
+void SI4713_beginRDS(void);
+void SI4713_setRDSStation(char *s);
+void SI4713_setRDSBuffer(char *s);
+void SI4713_setRDSMessage(char *station, char *buffer);
+bool SI4713_begin(void);
+void SI4713_setGPIODirection(uint8_t dir);
+void SI4713_setGPIOLevel(uint8_t level);
